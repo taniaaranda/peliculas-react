@@ -3,14 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
 import './firebase'
 import 'bootswatch/dist/superhero/bootstrap.min.css'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import Barra from './components/Barra';
+import MisPeliculas from './components/MisPeliculas';
+
+
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div>
+        <BrowserRouter>
+          <Barra/>
+          <br/>
+            <Switch>
+                <Route exact path="/" component={App} />
+                <Route exact path="/mis_peliculas" component={MisPeliculas} /> 
+              </Switch>
+        </BrowserRouter>
+      </div>
   </React.StrictMode>,
   document.getElementById('root')
 );
