@@ -57,8 +57,8 @@ class List extends React.Component{
                 </div>
                 <div className="row">
                     {
-                        data.map((movie, i) => {
-                            return <Card movie={movie} key={i}/>
+                        data.map((movie) => {
+                            return <Card movie={movie} key={movie.imdbID}/>
                         })
                     }
                 </div>
