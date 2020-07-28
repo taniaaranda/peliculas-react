@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
-import Card from '../components/Card/Card';
+import Pelicula from '../components/Pelicula';
+import {Container, Row} from 'react-bootstrap/'
 
-const API = 'https://www.omdbapi.com/?apikey=aa3fe5ee';
+const API = 'https://www.omdbapi.com/?i=tt3896198&apikey=aa3fe5ee';
+const APIfirebase = 'todavianolatengo';
 
-class List extends React.Component{
+class MisPeliculas extends React.Component{
 
     constructor(){
         super();
@@ -41,28 +43,18 @@ class List extends React.Component{
         }
         return (
             <Fragment>
-                <div className="row">
-                    <div className="col-md-4 offset-md-4 p-4">
-                        <form onSubmit={(e) => this.handleSubmit(e)}>
-                            <input type="text" className="form-control" 
-                            placeholder="Buscar" 
-                            onChange={e => this.setState({searchTerm: e.target.value})}
-                            value={this.state.searchTerm}
-                            autoFocus/>
-                        </form>
-                        <p className="text-white">{this.state.error ? this.state.error : ''}</p>
-                    </div>
-                </div>
-                <div className="row">
-                    {
-                        data.map((movie) => {
-                            return <Card movie={movie} key={movie.imdbID}/>
-                        })
-                    }
-                </div>
+                <Container>
+                    <Row style={{backgroundColor:'white'}}>
+                        {
+                            data.map((movie, i) => {
+                                return <Pelicula movie={movie} key={i}/>
+                            })
+                        }
+                    </Row>
+                </Container>
             </Fragment>
         )
     }
 }
 
-export default List;
+export default MisPeliculas;
