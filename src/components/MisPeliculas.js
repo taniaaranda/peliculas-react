@@ -2,7 +2,7 @@ import React, {Fragment} from 'react';
 import Pelicula from '../components/Pelicula';
 import {Container, Row} from 'react-bootstrap/'
 
-const API = 'http://www.omdbapi.com/?i=tt3896198&apikey=aa3fe5ee';
+const API = 'https://www.omdbapi.com/?i=tt3896198&apikey=aa3fe5ee';
 const APIfirebase = 'todavianolatengo';
 
 class MisPeliculas extends React.Component{
