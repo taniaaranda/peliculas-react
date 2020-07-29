@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {Row, Col, Card} from 'react-bootstrap/'
 
+const URLDELETE = "https://firestore.googleapis.com/v1/projects/peliculas-react/databases/(default)/documents/movies/";
 
 function handleClick(e) {
     const requestOptions = {
         method: 'DELETE'
       };
-      fetch("https://tp3appweb.firebaseio.com/nada.json", requestOptions).then((response) => {
+      fetch(URLDELETE, requestOptions).then((response) => {
         return response.json();
       }).then((result) => {
         alert("borrado")
@@ -15,8 +16,8 @@ function handleClick(e) {
 }
 
 
+
 const Pelicula = ({movie}) => {
-    console.log({movie})
     return (
         <div>
             <div className="col-md-2 offset-md-2">

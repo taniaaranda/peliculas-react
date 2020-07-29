@@ -1,9 +1,11 @@
 import React, {Fragment} from 'react';
 import Pelicula from '../components/Pelicula';
-import {Container, Row} from 'react-bootstrap/'
+import {Container, Row} from 'react-bootstrap/';
+import  {db} from '../firebase';
 
-const API = 'https://www.omdbapi.com/?i=tt3896198&apikey=aa3fe5ee';
-const APIfirebase = 'todavianolatengo';
+const API = 'https://www.omdbapi.com/?apikey=aa3fe5ee';
+const APIfirebase = 'https://firestore.googleapis.com/v1/projects/peliculas-react/databases/(default)/documents/movies/';
+
 
 class MisPeliculas extends React.Component{
 
@@ -17,10 +19,28 @@ class MisPeliculas extends React.Component{
         }
     }
 
+ 
+
     async componentDidMount(){
-        const res =  await fetch(`${API}&s=batman`)
+        const res =  await fetch(`${APIfirebase}`)
         const resJSON = await res.json()
-        this.setState({data:resJSON.Search, loading: false})
+        resJSON.documents.map((movie, i) => {
+            console.log(movie.fields.Title)
+            this.setState({data:movie, loading: false})
+        })
+        
+
+        //this.setState({data:resJSON.Search, loading: false})
+        
+        /*
+        db.collection("movies")
+        .get()
+        .then(querySnapshot => {
+        const data = querySnapshot.docs.map(doc => doc.data());
+        console.log(data); // array of cities objects
+        this.setState({data:data, loading: false})
+        });
+        */
     }
 
     async handleSubmit(e){
