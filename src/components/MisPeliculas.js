@@ -4,7 +4,7 @@ import {Container, Row} from 'react-bootstrap/';
 import  {db} from '../firebase';
 
 const API = 'https://www.omdbapi.com/?apikey=aa3fe5ee';
-const APIfirebase = 'https://firestore.googleapis.com/v1/projects/peliculas-react/databases/(default)/documents/movies/';
+const APIfirebase = 'https://peliculas-react.firebaseio.com/movies/movies.json';
 
 
 class MisPeliculas extends React.Component{
@@ -24,11 +24,13 @@ class MisPeliculas extends React.Component{
     async componentDidMount(){
         const res =  await fetch(`${APIfirebase}`)
         const resJSON = await res.json()
-        resJSON.documents.map((movie, i) => {
-            console.log(movie.fields.Title)
-            this.setState({data:movie, loading: false})
-        })
-        
+        var arr = []
+        Object.keys(resJSON).forEach(function(key) {
+            var movie = resJSON[key];
+            movie['id'] = key;
+            arr.push(movie);
+        });
+        this.setState({data:arr, loading: false})
 
         //this.setState({data:resJSON.Search, loading: false})
         
@@ -41,19 +43,6 @@ class MisPeliculas extends React.Component{
         this.setState({data:data, loading: false})
         });
         */
-    }
-
-    async handleSubmit(e){
-        e.preventDefault();
-        if(!this.state.searchTerm){
-            return this.setState({error:'Debe escribir un texto valido'})
-        }
-        const res = await fetch(`${API}&s=${this.state.searchTerm}`)
-        const data = await res.json();
-        if(!data.Search){
-            return this.setState({error: 'No se encontaron resultados'})
-        }
-        this.setState({data: data.Search, error:'', searchTerm:''})
     }
 
     render(){
