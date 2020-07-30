@@ -24,7 +24,7 @@ var firebaseConfig = {
   };
 
   // Initialize Firebase
-  const fb = firebase.initializeApp(firebaseConfigAnele); //REEMPLAZAR POR firebaseConfig. yo solo estoy probando con una mia
+  const fb = firebase.initializeApp(firebaseConfig); //REEMPLAZAR POR firebaseConfig. yo solo estoy probando con una mia
   //firebase.analytics();
   //export const auth = firebase.auth();
   export const db = fb.firestore();
