@@ -45,12 +45,14 @@ const Card = ({movie}) => {
         const res =  await fetch(`https://peliculas-react.firebaseio.com/movies.json`);
         const resJSON = await res.json();
         var arr = [];
-        Object.keys(resJSON.movies).forEach(function(key) {
-            arr.push(resJSON.movies[key]);
-            if(resJSON.movies[key].imdbID === movie.imdbID){
-                agregada = true;
-            }
-        });
+        if (resJSON){
+            Object.keys(resJSON.movies).forEach(function(key) {
+                arr.push(resJSON.movies[key]);
+                if(resJSON.movies[key].imdbID === movie.imdbID){
+                    agregada = true;
+                }
+            });
+        }
         if(!agregada){
             addToFirebase(movie);
         }else{

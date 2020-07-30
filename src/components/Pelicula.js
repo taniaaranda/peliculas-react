@@ -9,15 +9,11 @@ class Pelicula extends React.Component{
     constructor(){
         super();
         this.state = {
-            data: [],
-            searchTerm:'',
-            error:'',
-            loading: true,
             render: true
         }
     }
 
-    handleClick(e, movie) {
+    handleClick(e, movie,i) {
         const requestOptions = {
             method: 'DELETE'
         };
@@ -27,12 +23,14 @@ class Pelicula extends React.Component{
             console.log("pelicula borrada")
         });
         this.setState({render:false})
+        this.props.handler(i)
     }
 
 
 
     render(){
         const movie = this.props.movie
+        const index = this.props.index
         if (this.state.render){
             return (
                 <div>
@@ -49,7 +47,7 @@ class Pelicula extends React.Component{
                                 <Card.Text>
 
                                 </Card.Text>
-                                <button type="button" className="btn btn-outline-danger" onClick={(e) =>this.handleClick(e, movie)}>Eliminar de mi lista</button>
+                                <button type="button" className="btn btn-outline-danger" onClick={(e) =>this.handleClick(e, movie, index)}>Eliminar de mi lista</button>
                             </Card.Body>
                         </Card>
                     </div>
@@ -57,13 +55,7 @@ class Pelicula extends React.Component{
             )
         }
         else{
-            if (this.state.data.lenght == 0){
-                alert("no hay mas pelis")
-                return null
-            }
-            else{
-                return null
-            }
+            return null
         }
     };
 
