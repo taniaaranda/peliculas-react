@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import Card from '../components/Card/Card';
 
-const API = 'https://www.omdbapi.com/?apikey=aa3fe5ee';
+const API = 'http://www.omdbapi.com/?i=tt3896198&apikey=aa3fe5ee';
 
 class List extends React.Component{
 
@@ -16,9 +16,11 @@ class List extends React.Component{
     }
 
     async componentDidMount(){
+        //const res = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=6723abcb736dade2ce411013316b9e8f&language=es-ES&page=')
         const res =  await fetch(`${API}&s=batman`)
         const resJSON = await res.json()
         this.setState({data:resJSON.Search, loading: false})
+        //console.log(this.state.data)
     }
 
     async handleSubmit(e){
