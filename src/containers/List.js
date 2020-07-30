@@ -82,6 +82,10 @@ class List extends React.Component{
                             <p className="text-white">{this.state.error ? this.state.error : ''}</p>
                         </div>
                     </div>
+                    <div className="col-md-4 offset-md-4 p-4">
+                    <h1><small className="text-muted">POPULAR MOVIES</small></h1>
+                    </div>
+                    
                     <div className="row">
                         {
                             data.map((movie) => {
